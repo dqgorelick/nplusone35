@@ -6,14 +6,30 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <script src="http://threejs.org/build/three.min.js"></script>
-    <script src="http://threejs.org/examples/js/renderers/SVGRenderer.js"></script>
-    <script src="http://threejs.org/examples/js/renderers/Projector.js"></script>
-    <script src="http://threejs.org/examples/js/loaders/SVGLoader.js"></script>
-    <script src="vendor/Detector.js"></script>
 </head>
 <body>
-	<div id='container'></div>
+	<div class="world-wrapper">
+		<div class="clouds-wrapper">
+			<div class="clouds"></div>
+		</div>
+	</div>
+	<div class="initial-clouds" style="display: none">
+		<svg id="cloud0" width="850" height="631" viewBox="0 0 850 631" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M779.127 284.165C713.714 282.968 653.771 193.861 571.261 192.357C488.751 190.854 526.412 139.981 435.293 138.335C344.175 136.688 411.347 89.5197 340.137 88.2249C268.926 86.9301 264.284 42.5444 162.283 40.7029C60.2831 38.8614 60.7016 367.51 60.7016 367.51L474.409 367.51L816.84 367.51L779.127 284.165Z" fill="white"/>
+		</svg>
+		<svg id="cloud1" width="539" height="414" viewBox="0 0 539 414" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M434.393 340.994C460.156 309.595 512.179 260.831 514.271 216.905C515.731 186.339 490.373 183.837 466.849 175.365C434.305 163.66 415.696 144.691 397.735 115.452C384.534 93.9413 370.641 54.0924 340.361 53.4765C312.244 52.9098 287.54 86.4872 263.747 97.8588C235.278 111.477 215.213 103.855 187.133 95.217C137.86 80.0688 150.219 131.177 108.601 143.214C81.4939 151.062 42.9424 140.989 29.4814 173.592C8.91512 223.389 73.18 303.361 96.7474 341.599" fill="#EE3242"/>
+		</svg>
+		<svg id="cloud2" width="909" height="857" viewBox="0 0 909 857" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M581.925 257.914C496.019 194.867 380.438 306.28 263.078 193.801C145.717 81.3217 71.0466 394.262 71.0466 394.262L58.5 454L903 454L885.781 428.783C805.358 369.76 782.47 405.096 581.925 257.914Z" fill="#F4C376"/>
+		</svg>
+		<svg id="cloud3" width="476" height="438" viewBox="0 0 476 438" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M378.5 145.959C320.5 97.5 313.256 161.774 276.46 145.959C237.311 129.125 217.985 160.221 183.287 145.306C148.603 130.387 122.433 186.318 69.5148 163.568C16.5966 140.819 30.6972 253.854 30.6972 253.854L424 253.854L445 253.854L378.5 145.959Z" fill="#C6B732"/>
+		</svg>
+		<svg id="cloud4" width="594" height="617" viewBox="0 0 594 617" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M411.627 180.689C350.446 63.0202 221.881 34.9313 197.32 112.859C172.76 190.786 8.87128 205.255 83.5 348.788L120.5 425L589.5 425L555.567 348.788C461.926 168.688 472.807 298.357 411.627 180.689Z" fill="#3260C6"/>
+		</svg>
+	</div>
 	<script src="./script.js"></script>
 </body>
 </html>
