@@ -1,8 +1,30 @@
-const NUM_CLOUDS = 100;
+const NUM_CLOUDS = 30;
+const BREAKPOINT = 200;
+const INTERVAL = 10; 
+const TICK_TIME = 1000;
 
 const randRange = (min, max) => {
   return Math.floor(Math.random()*(max-min)) + min;
 }
+
+const applyCloudTransform = (transform) => (
+	`
+	transform-origin: center;
+	transform: 
+		translateX(${transform.translateX}px)
+		translateY(${transform.translateY}px)
+		translateZ(${transform.translateZ}px)
+		;
+	`
+)
+
+
+const applyCloudTransition = () => {
+	[...document.querySelectorAll('.cloud')].forEach((cloud) => {
+		cloud.style.transition = 'transform 2s linear';
+	})
+}
+
 
 const generateCloud = () => {
 	for (let i=0; i<NUM_CLOUDS; i++) {
@@ -15,17 +37,17 @@ const generateCloud = () => {
 		
 		// need to append cloud before getting box
 		const box = newCloud.querySelectorAll('path')[0].getBBox();
-		newCloud.setAttributeNS(null, 'style',
-		  `
-		  transform-origin: center;
-		  transform: 
-		  	translateY(${window.innerHeight-box.y-box.height}px)
-		  	translateX(${randRange(-1000, 1000)}px)
-		  	translateZ(${-(NUM_CLOUDS - 1 - i) * 10}px)
-		  	scale(${randRange(1,3)})
-		  	;
-		  `
-		)
+		const centerX = (window.innerWidth/2) - (box.width/2);
+		const transform = {
+			translateX: centerX + randRange(-1000, 1000),
+			translateY: window.innerHeight-box.y-box.height,
+			translateZ: -(NUM_CLOUDS - 1 - i) * 15,
+			state: 0,
+			height: box.height,
+		}
+		newCloud.setAttributeNS(null, 'style', applyCloudTransform(transform));
+		newCloud.setAttributeNS(null, 'data-transform', JSON.stringify(transform));
+
 		  // --stroke-width: ${mapVelocity(velocity)};
 		  // --offset: ${path_offset};
 		  // --start: ${start};
@@ -33,14 +55,45 @@ const generateCloud = () => {
 		  // --initial: ${initial};
 		  // --segment_length: ${segment_length}`)
 	}
+	// apply cloud transition after they are rendered
+	// setTimeout(applyCloudTransition, 500);
 }
 
 generateCloud();
 
-var globalPos = 0;
+var globalPos = -200;
 
-// setInterval(() => {
-// 	globalPos += 0
-// 	document.querySelectorAll('.clouds')[0].style.transform = `translateZ(${globalPos}px)`
-// 	console.log('hello', globalPos)
-// }, 1000)
+document.addEventListener('click', () => {console.log(globalPos)});
+setInterval(() => {
+	globalPos += INTERVAL
+	document.querySelectorAll('.clouds')[0].style.transform = `translateZ(${globalPos}px)`
+	checkClouds();
+}, TICK_TIME)
+
+const checkClouds = () => {
+
+	[...document.querySelectorAll('.cloud')].forEach((cloud) => {
+		var transform = JSON.parse(cloud.dataset.transform);
+		if (transform.translateZ > -(globalPos + BREAKPOINT)) {
+			if (transform.state === 0) {
+				console.log('apply transform!', transform.translateZ, -(globalPos + BREAKPOINT))
+				const newTransform = { 
+					...transform, 
+					translateY: transform.translateY + transform.height,
+					state: 1,
+				}
+				cloud.setAttributeNS(null, 'style', 
+					applyCloudTransform(newTransform) 
+					+ `transition: transform ${BREAKPOINT / (INTERVAL * (TICK_TIME/1000))}s linear`
+				);
+				cloud.setAttributeNS(null, 'data-transform', JSON.stringify(newTransform))
+
+			}
+		}
+		if (transform.translateZ > -(globalPos - BREAKPOINT)) {
+			console.log(transform.translateZ, globalPos)
+			console.log('removed child')
+			cloud.parentNode.removeChild(cloud);
+		}
+	})
+}
