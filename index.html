@@ -5,29 +5,244 @@
 	<title>n+1 35</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+    <style type="text/css">
+    	* {
+    		transform-style: preserve-3d;
+    	}
+    	html, body {
+    		margin: 0;
+    		padding: 0;
+    	}
+    	body {
+    		background: #214596;
+    		background: -moz-linear-gradient(top, #000000 0%, #214596 52%, #214596 100%); 
+    		background: -webkit-linear-gradient(top, #000000 0%,#214596 52%,#214596 100%); 
+	    	background: linear-gradient(to bottom, #000000 0%,#214596 52%,#214596 100%); 
+    		width: 100vw;
+    		height: 100vh;
+    		overflow: hidden;
+    		perspective: 210px;
+    		perspective-origin: 50% 100%;
+    	}
+    	.clouds {
+    		position: absolute;
+    		transition: transform 1s linear;
+    	}
+    	.cloud {
+    		position: absolute;
+    		top: 0;
+    	}
+    </style>
 </head>
 <body>
-	<div id="space">
-		<div class="clouds"></div>
-	</div>
+	<div class="clouds"></div>
 	<div class="initial-clouds" style="display: none">
-		<svg id="cloud0" width="850" height="631" viewBox="0 0 850 631" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<path d="M779.127 284.165C713.714 282.968 653.771 193.861 571.261 192.357C488.751 190.854 526.412 139.981 435.293 138.335C344.175 136.688 411.347 89.5197 340.137 88.2249C268.926 86.9301 264.284 42.5444 162.283 40.7029C60.2831 38.8614 60.7016 367.51 60.7016 367.51L474.409 367.51L816.84 367.51L779.127 284.165Z" fill="white"/>
+		<svg id="cloud0" width="850" height="631" viewBox="0 0 850 631" xmlns="http://www.w3.org/2000/svg">
+		<path d="M779.127 284.165C713.714 282.968 653.771 193.861 571.261 192.357C488.751 190.854 526.412 139.981 435.293 138.335C344.175 136.688 411.347 89.5197 340.137 88.2249C268.926 86.9301 264.284 42.5444 162.283 40.7029C60.2831 38.8614 60.7016 367.51 60.7016 367.51L474.409 367.51L816.84 367.51L779.127 284.165Z"/>
 		</svg>
-		<svg id="cloud1" width="539" height="414" viewBox="0 0 539 414" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<path d="M434.393 340.994C460.156 309.595 512.179 260.831 514.271 216.905C515.731 186.339 490.373 183.837 466.849 175.365C434.305 163.66 415.696 144.691 397.735 115.452C384.534 93.9413 370.641 54.0924 340.361 53.4765C312.244 52.9098 287.54 86.4872 263.747 97.8588C235.278 111.477 215.213 103.855 187.133 95.217C137.86 80.0688 150.219 131.177 108.601 143.214C81.4939 151.062 42.9424 140.989 29.4814 173.592C8.91512 223.389 73.18 303.361 96.7474 341.599" fill="#EE3242"/>
+		<svg id="cloud1" width="539" height="414" viewBox="0 0 539 414" xmlns="http://www.w3.org/2000/svg">
+		<path d="M434.393 340.994C460.156 309.595 512.179 260.831 514.271 216.905C515.731 186.339 490.373 183.837 466.849 175.365C434.305 163.66 415.696 144.691 397.735 115.452C384.534 93.9413 370.641 54.0924 340.361 53.4765C312.244 52.9098 287.54 86.4872 263.747 97.8588C235.278 111.477 215.213 103.855 187.133 95.217C137.86 80.0688 150.219 131.177 108.601 143.214C81.4939 151.062 42.9424 140.989 29.4814 173.592C8.91512 223.389 73.18 303.361 96.7474 341.599"/>
 		</svg>
-		<svg id="cloud2" width="909" height="857" viewBox="0 0 909 857" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<path d="M581.925 257.914C496.019 194.867 380.438 306.28 263.078 193.801C145.717 81.3217 71.0466 394.262 71.0466 394.262L58.5 454L903 454L885.781 428.783C805.358 369.76 782.47 405.096 581.925 257.914Z" fill="#F4C376"/>
+		<svg id="cloud2" width="909" height="857" viewBox="0 0 909 857" xmlns="http://www.w3.org/2000/svg">
+		<path d="M581.925 257.914C496.019 194.867 380.438 306.28 263.078 193.801C145.717 81.3217 71.0466 394.262 71.0466 394.262L58.5 454L903 454L885.781 428.783C805.358 369.76 782.47 405.096 581.925 257.914Z"/>
 		</svg>
-		<svg id="cloud3" width="476" height="438" viewBox="0 0 476 438" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<path d="M378.5 145.959C320.5 97.5 313.256 161.774 276.46 145.959C237.311 129.125 217.985 160.221 183.287 145.306C148.603 130.387 122.433 186.318 69.5148 163.568C16.5966 140.819 30.6972 253.854 30.6972 253.854L424 253.854L445 253.854L378.5 145.959Z" fill="#C6B732"/>
+		<svg id="cloud3" width="957" height="880" viewBox="0 0 957 880" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M761.042 292.75C644.423 195.315 629.858 324.549 555.873 292.75C477.157 258.903 438.299 321.426 368.532 291.437C298.793 261.44 246.174 373.899 139.772 328.157C33.3704 282.415 61.7223 509.693 61.7223 509.693L852.528 509.693L894.753 509.693L761.042 292.75Z"/>
 		</svg>
-		<svg id="cloud4" width="594" height="617" viewBox="0 0 594 617" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<path d="M411.627 180.689C350.446 63.0202 221.881 34.9313 197.32 112.859C172.76 190.786 8.87128 205.255 83.5 348.788L120.5 425L589.5 425L555.567 348.788C461.926 168.688 472.807 298.357 411.627 180.689Z" fill="#3260C6"/>
+		<svg id="cloud4" width="484" height="503" viewBox="0 0 484 503" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M334.637 147.087C284.833 51.3008 180.177 28.4353 160.183 91.8711C140.19 155.307 6.77893 167.085 67.5295 283.926L97.6488 345.966L479.432 345.966L451.809 283.926C375.582 137.318 384.44 242.874 334.637 147.087Z"/>
 		</svg>
 	</div>
-	<script src="./script.js"></script>
+	<script>
+		var intervalAmount = 18; 
+		const MAX_CLOUDS = 18;
+		const TICK_TIME_MS = 1000;
+		const CLOUD_OFFSET_PX = 500;
+		const BREAKPOINT_PX = 450;
+		const CLOUD_SPACING_PX = 50;
+		const CLOUD_SCALE = 5;
+		const RANDOM_COLOR = true;
+		const X_SPREAD_PX =window.innerWidth; 
+
+		const randRange = (min, max) => {
+		  return Math.floor(Math.random()*(max-min)) + min;
+		}
+
+		// ensure more occurances of cloud # 1
+		const cloudDistribution = [
+			0,
+			2,
+			3,
+			4,
+			1,
+			1,
+			1,
+		];
+
+		const COLOR_BLUE = '#214596'; // background color case
+
+		const colors = [
+			'#95CEf0', // light blue 
+			'#E79991', // pink
+			'#FFE148', // yellow
+			'#4B4C87', // dark blue
+			'#000000', // black
+			'#DC383E', // red 
+			'#F2C2B9', // pink
+			COLOR_BLUE, // blue
+			'#221838', // dark blue
+			'#FFFFFF', // white
+			'#95CEf0', // light blue 
+			'#FFE148', // yellow
+			'#DC383E', // red 
+			'#F2C2B9', // pink
+		];
+
+		const colorsUnique = [
+			'#95CEf0', // light blue 
+			'#E79991', // pink
+			'#FFE148', // yellow
+			'#4B4C87', // dark blue
+			'#000000', // black
+			'#DC383E', // red 
+			'#F2C2B9', // pink
+			'#214596', // blue
+			'#221838', // dark blue
+			'#FFFFFF', // white
+		];
+
+		var lastColor = COLOR_BLUE;
+		var lastColor2 = '#000000';
+		var lastColor3 = '#4B4C87';
+
+		// global state vars
+		var colorIndex = randRange(0,colors.length);
+		var globalPos = 0;
+		var lastCloudZ = -CLOUD_OFFSET_PX;
+
+		const applyCloudTransform = (transform) => (
+			`
+			transform-origin: center;
+			transform: 
+				translateX(${transform.translateX}px)
+				translateY(${transform.translateY}px)
+				translateZ(${transform.translateZ}px)
+				scale(${transform.scale})
+				scaleX(${transform.flipped})
+				rotateZ(${transform.rotation}deg)
+				;
+			fill: ${transform.color};
+			`
+		)
+
+		const getRandomCloud = () => (`cloud${cloudDistribution[randRange(0, cloudDistribution.length)]}`)
+
+		const generateClouds = (n) => {
+			for (let i=0; i<n; i++) {
+				const cloud=document.getElementById(getRandomCloud())
+				
+				const newCloud=cloud.cloneNode(true)
+				newCloud.setAttributeNS(null, 'class', 'cloud');
+				// need to append cloud before getting box
+				document.querySelectorAll('.clouds')[0].appendChild(newCloud)
+				// apply initial rotation to recalculate Y
+				const rotation = randRange(-8, 8) 
+				newCloud.setAttributeNS(null, 'style', `rotateZ(${rotation}deg)`);
+				const box = newCloud.querySelectorAll('path')[0].getBBox();
+
+				var color = colors[colorIndex] 
+				if (RANDOM_COLOR) {
+					const colorOptions = [...colorsUnique];
+					colorOptions.splice(colorOptions.indexOf(lastColor), 1);
+					colorOptions.splice(colorOptions.indexOf(lastColor2), 1);
+					colorOptions.splice(colorOptions.indexOf(lastColor3), 1);
+					console.log(lastColor, lastColor2, colorOptions)
+					color = colorOptions[randRange(0, colorOptions.length+1)]
+					
+					lastColor3 = lastColor2; 
+					lastColor2 = lastColor; 
+					lastColor = color;
+				}
+				const xSpread = color === COLOR_BLUE ? X_SPREAD_PX*0.5 : X_SPREAD_PX;
+				const offsetX = (window.innerWidth/2) - (box.width/2) + randRange(-xSpread, xSpread);
+				const offsetY = window.innerHeight-box.y-box.height;
+				const offsetZ = lastCloudZ - CLOUD_SPACING_PX;
+				if (offsetZ < lastCloudZ) {
+					lastCloudZ = offsetZ;
+				}
+				const scale = CLOUD_SCALE * (Math.random() + 1) * 0.8;
+				const transform = {
+					translateX: offsetX,
+					translateY: offsetY,
+					translateZ: offsetZ,
+					state: 0,
+					height: box.height*scale,
+					color: color,
+					scale: scale,
+					flipped: Math.random() < 0.5 ? -1 : 1,
+					rotation: rotation
+				}
+				newCloud.setAttributeNS(null, 'style', applyCloudTransform(transform));
+				newCloud.setAttributeNS(null, 'data-transform', JSON.stringify(transform));
+
+				colorIndex += 1
+				colorIndex %= colors.length
+			}
+		}
+
+		const init = () => {
+			generateClouds(MAX_CLOUDS);
+			moveClouds();
+		}
+
+		const moveClouds = () => {
+			cloudsMoving = true;
+			setInterval(() => {
+				globalPos += intervalAmount
+				document.querySelectorAll('.clouds')[0].style.transform = `translateZ(${globalPos}px)`
+				checkClouds();
+			}, TICK_TIME_MS)
+		}
+
+		const checkClouds = () => {
+			const clouds = document.querySelectorAll('.cloud');
+			// console.log(`${clouds.length} clouds active` )
+			if (clouds.length < MAX_CLOUDS) {
+				// console.log(`added ${MAX_CLOUDS - clouds.length} new cloud${MAX_CLOUDS - clouds.length === 1 ? '' : 's'}!`)
+				generateClouds(MAX_CLOUDS - clouds.length);
+			}
+			[...clouds].forEach((cloud) => {
+				var transform = JSON.parse(cloud.dataset.transform);
+				if (transform.state === 0) {
+					if (transform.translateZ > -(globalPos + BREAKPOINT_PX)) {
+							const newTransform = { 
+								...transform, 
+								translateY: transform.translateY + transform.height,
+								state: 1,
+							}
+							cloud.setAttributeNS(null, 'style', 
+								applyCloudTransform(newTransform) 
+								+ `transition: transform ${BREAKPOINT_PX / (intervalAmount * (TICK_TIME_MS/1000))}s cubic-bezier(0.55, 0.085, 0.68, 0.53)`
+							);
+							cloud.setAttributeNS(null, 'data-transform', JSON.stringify(newTransform))
+					}
+				} 
+				if (transform.state === 1) {
+					if (transform.translateZ > -(globalPos)) {
+						// console.log('removed child')
+						cloud.parentNode.removeChild(cloud);
+					}
+				}
+			})
+		}
+
+		document.addEventListener('click', (e) => {
+			// const newInterval = ((window.innerHeight - e.clientY) / window.innerHeight) * 90 + 10;
+			// intervalAmount = newInterval
+			console.log(`POS: ${globalPos}, INTERVAL: ${intervalAmount}`);
+		})
+
+		init();
+	</script>
 </body>
 </html>
